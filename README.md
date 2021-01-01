@@ -4,8 +4,8 @@
 
 ## Technology Stack
 
-- [NodeJs]
-- [Puppeteer]
+- [NodeJs](https://nodejs.org/en/)
+- [Puppeteer](https://developers.google.com/web/tools/puppeteer/)
 
 ## Author
 
