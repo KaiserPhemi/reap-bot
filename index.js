@@ -2,14 +2,22 @@
 require("dotenv").config();
 const puppeteer = require("puppeteer");
 
-const ps5Url = process.env.EBAY_PS5;
+const soldPS5 = process.env.SOLD_PS5;
 const xBoxUrl = process.env.EBAY_XBOX;
 
 const scrapper = async () => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
-  await page.goto(xBoxUrl);
-  // await page.waitFor(1000);
+  await page.goto(soldPS5, { waitUntil: "networkidle2" });
+  let data = await page.evaluate(() => {
+    let totalItemsSold = document.querySelector('span[class="rcnt"]').innerText;
+    let itemName = document.querySelector('span[class="kwcat"]').innerText;
+
+    return { totalItemsSold, itemName };
+  });
+
+  console.log(data);
+
   // browser.close();
   // await page.screenshot({
   //   path: "main-example.png",
